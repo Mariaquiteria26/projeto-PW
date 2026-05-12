@@ -11,6 +11,6 @@ require_once __DIR__ . '/../../protege.php';
 </head>
 <body>
     <h1>Painel</h1>
-    <p>aqui vai ter os ngc pra ir pros cruds!</p>
+    <p>aqui vai ter os ngc pra ir pros!</p>
 </body>
 </html>
