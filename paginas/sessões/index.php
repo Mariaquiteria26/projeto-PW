@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../protege.php';
+require_once __DIR__ . '/../../login/protege.php';
 ?>
 
 <!DOCTYPE html>

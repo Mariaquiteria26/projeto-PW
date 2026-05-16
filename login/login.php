@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['user_id'])) {
-    header('Location: paginas/painel/index.php');
+    header('Location: /PROJETO-PW/paginas/painel/index.php');
     exit();
 }
 
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($usuario && $senha === $usuario['senha']) {
             $_SESSION['user_id'] = $usuario['id'];
-            header('Location: paginas/painel/index.php');
+            header('Location: /PROJETO-PW/paginas/painel/index.php');
             exit();
         } else {
             $erro = 'Email ou senha inválidos.';
