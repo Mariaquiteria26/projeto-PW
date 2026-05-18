@@ -76,6 +76,9 @@ $filmes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <th class="text-left p-5 text-zinc-400">
                         Classificação
                     </th>
+                    <th class="text-left p-5 text-zinc-400">
+                          Ações
+                    </th>
 
                 </tr>
 
@@ -102,7 +105,15 @@ $filmes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td class="p-5">
                             <?php echo htmlspecialchars($filme['classificacao']); ?>
                         </td>
+                        <td class="p-5">
+                            <a href="editar.php?id=<?php echo $filme['id']; ?>" class="bg-blue-500 text-white px-4 py-2 rounded-xl">
+                                Editar
+                            </a>
 
+                            <a href="delete.php?id=<?php echo $filme['id']; ?>" class="bg-red-500 text-white px-4 py-2 rounded-xl" onclick="return confirm('Tem certeza que deseja excluir?')">
+                                Excluir
+                            </a>
+                        </td>  
                     </tr>
 
                 <?php endforeach; ?>
