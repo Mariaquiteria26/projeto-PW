@@ -4,11 +4,17 @@ require_once __DIR__ . '/../../login/conexao.php';
 
 $pdo = getConexao();
 
-$stmt = $pdo->query("SELECT COUNT(*) AS total FROM filmes");
+$sql = "SELECT COUNT(*) AS total FROM filmes";
+$stmt = $pdo->query($sql);
 $totalFilmes = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
 
-$stmt = $pdo->query("SELECT * FROM filmes ORDER BY id DESC LIMIT 3");
+$sql = "SELECT * FROM filmes ORDER BY id DESC LIMIT 3";
+$stmt = $pdo->query($sql);
 $filmesEmCartaz = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$sql = "SELECT COUNT(*) AS total FROM sessoes";
+$stmt = $pdo->query($sql);
+$totalSessoes = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
 ?>
 
 <!DOCTYPE html>
@@ -113,7 +119,9 @@ $filmesEmCartaz = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
 
                 <p class="text-zinc-400 text-lg mb-2">Sessões</p>
-                <h3 class="text-4xl font-bold text-orange-500">28</h3>
+                <h3 class="text-4xl font-bold text-orange-500">
+                    <?php echo $totalSessoes; ?>
+                </h3>
             </div>
 
             <div class="bg-[#101014] border border-zinc-900 rounded-3xl p-6">
