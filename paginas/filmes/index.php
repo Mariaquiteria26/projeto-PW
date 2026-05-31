@@ -4,8 +4,13 @@ require_once __DIR__ . '/../../login/conexao.php';
 
 $pdo = getConexao();
 
-$stmt = $pdo->query("SELECT * FROM filmes ORDER BY id DESC");
+$sql = "SELECT * FROM filmes";
+$stmt = $pdo->query($sql);
 $filmes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$sql = "SELECT COUNT(*) AS total FROM filmes";
+$stmt = $pdo->query($sql);
+$totalFilmes = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
 ?>
 
 <!DOCTYPE html>
@@ -13,116 +18,168 @@ $filmes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Filmes</title>
+    <title>Filmes - Cinema Control</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        body{
-            font-family: 'Poppins', sans-serif;
-        }
+        body { font-family: 'Poppins', sans-serif; }
     </style>
 </head>
 
-<body class="bg-black text-white min-h-screen p-8">
+<body class="bg-black text-white flex min-h-screen">
 
-    <!-- TOPO -->
-    <div class="flex items-center justify-between mb-10">
-
+    <aside class="w-60 min-h-screen bg-[#050505] border-r border-zinc-900 flex flex-col justify-between p-5">
         <div>
-            <h1 class="text-5xl font-bold mb-2">
-                 Filmes
-            </h1>
+            <div class="mb-10">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-11 h-11 rounded-xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center shadow-[0_0_20px_rgba(249,115,22,0.25)]">
+                        <i data-lucide="clapperboard" class="w-7 h-7 text-orange-400"></i>
+                    </div>
 
-            <p class="text-zinc-400">
-                Lista de filmes cadastrados
-            </p>
+                    <h1 class="text-2xl font-bold leading-tight">
+                        <span class="text-orange-500">Cinema</span><br>
+                        Control
+                    </h1>
+                </div>
+
+                <p class="text-zinc-500 text-sm">Painel administrativo</p>
+            </div>
+
+            <nav class="space-y-3">
+                <a href="../painel/index.php" class="flex items-center gap-3 text-zinc-200 hover:text-orange-400 hover:bg-orange-500/10 px-4 py-3 rounded-2xl transition">
+                    <i data-lucide="home" class="w-5 h-5"></i>
+                    <span class="text-sm">Painel</span>
+                </a>
+
+                <a href="../filmes/index.php" class="flex items-center gap-3 bg-orange-500/10 text-orange-400 px-4 py-3 rounded-2xl border border-orange-500/20 shadow-[0_0_20px_rgba(249,115,22,0.12)]">
+                    <i data-lucide="film" class="w-5 h-5"></i>
+                    <span class="text-sm font-medium">Filmes</span>
+                </a>
+
+                <a href="../sessoes/index.php" class="flex items-center gap-3 text-zinc-200 hover:text-orange-400 hover:bg-orange-500/10 px-4 py-3 rounded-2xl transition">
+                    <i data-lucide="clock-3" class="w-5 h-5"></i>
+                    <span class="text-sm">Sessões</span>
+                </a>
+
+                <a href="../ingressos/index.php" class="flex items-center gap-3 text-zinc-200 hover:text-orange-400 hover:bg-orange-500/10 px-4 py-3 rounded-2xl transition">
+                    <i data-lucide="ticket" class="w-5 h-5"></i>
+                    <span class="text-sm">Ingressos</span>
+                </a>
+            </nav>
         </div>
 
-        <a
-            href="cadastrar.php"
-
-            class="bg-orange-500 hover:bg-orange-600 transition px-6 py-4 rounded-2xl font-semibold"
-        >
-            + Cadastrar Filme
+        <a href="../../login/logout.php" class="flex items-center gap-3 text-red-400 hover:bg-red-500/10 px-4 py-3 rounded-2xl transition">
+            <i data-lucide="log-out" class="w-5 h-5"></i>
+            <span class="text-sm">Sair</span>
         </a>
+    </aside>
 
-    </div>
+    <main class="flex-1 p-8">
 
-    <!-- TABELA -->
-    <div class="bg-[#101014] border border-zinc-900 rounded-3xl overflow-hidden">
+        <div class="flex items-center justify-between mb-8">
+            <div class="flex items-center gap-5">
+                <div class="w-16 h-16 rounded-2xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center shadow-[0_0_25px_rgba(249,115,22,0.18)]">
+                    <i data-lucide="film" class="w-9 h-9 text-orange-400"></i>
+                </div>
 
-        <table class="w-full">
+                <div>
+                    <h1 class="text-4xl font-bold">Filmes</h1>
+                    <p class="text-zinc-400 mt-1">
+                        Gerencie todos os filmes cadastrados no Cinema Control
+                    </p>
+                </div>
+            </div>
 
-            <thead class="bg-zinc-900">
+            <a href="cadastrar.php" class="bg-orange-500 hover:bg-orange-600 transition px-6 py-4 rounded-2xl font-semibold shadow-[0_0_25px_rgba(249,115,22,0.18)]">
+                + Cadastrar Filme
+            </a>
+        </div>
 
-                <tr>
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-7">
+            <div class="bg-[#101014] border border-zinc-900 rounded-3xl p-6">
+                <div class="w-14 h-14 rounded-full bg-orange-500/10 flex items-center justify-center mb-4">
+                    <i data-lucide="clapperboard" class="w-7 h-7 text-orange-400"></i>
+                </div>
 
-                    <th class="text-left p-5 text-zinc-400">
-                        ID
-                    </th>
+                <p class="text-zinc-400 text-sm">Total de filmes</p>
 
-                    <th class="text-left p-5 text-zinc-400">
-                        Nome
-                    </th>
+                <h2 class="text-4xl font-bold text-orange-500 mt-1">
+                    <?php echo $totalFilmes; ?>
+                </h2>
+            </div>
+        </section>
 
-                    <th class="text-left p-5 text-zinc-400">
-                        Gênero
-                    </th>
+        <div class="bg-[#101014] border border-zinc-900 rounded-3xl overflow-hidden">
 
-                    <th class="text-left p-5 text-zinc-400">
-                        Classificação
-                    </th>
-                    <th class="text-left p-5 text-zinc-400">
-                          Ações
-                    </th>
+            <table class="w-full">
 
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                <?php foreach($filmes as $filme): ?>
-
-                    <tr class="border-t border-zinc-900 hover:bg-zinc-900/40 transition">
-
-                        <td class="p-5">
-                            <?php echo $filme['id']; ?>
-                        </td>
-
-                        <td class="p-5">
-                            <?php echo htmlspecialchars($filme['nome']); ?>
-                        </td>
-
-                        <td class="p-5">
-                            <?php echo htmlspecialchars($filme['genero']); ?>
-                        </td>
-
-                        <td class="p-5">
-                            <?php echo htmlspecialchars($filme['classificacao']); ?>
-                        </td>
-                        <td class="p-5">
-                            <a href="editar.php?id=<?php echo $filme['id']; ?>" class="bg-blue-500 text-white px-4 py-2 rounded-xl">
-                                Editar
-                            </a>
-
-                            <a href="delete.php?id=<?php echo $filme['id']; ?>" class="bg-red-500 text-white px-4 py-2 rounded-xl" onclick="return confirm('Tem certeza que deseja excluir?')">
-                                Excluir
-                            </a>
-                        </td>  
+                <thead class="bg-zinc-900/80">
+                    <tr>
+                        <th class="text-left p-5 text-zinc-400">ID</th>
+                        <th class="text-left p-5 text-zinc-400">Nome</th>
+                        <th class="text-left p-5 text-zinc-400">Gênero</th>
+                        <th class="text-left p-5 text-zinc-400">Classificação</th>
+                        <th class="text-left p-5 text-zinc-400">Ações</th>
                     </tr>
+                </thead>
 
-                <?php endforeach; ?>
+                <tbody>
 
-            </tbody>
+                    <?php foreach($filmes as $filme): ?>
 
-        </table>
+                        <tr class="border-t border-zinc-900 hover:bg-zinc-900/50 transition">
 
-    </div>
+                            <td class="p-5 text-zinc-300">
+                                <?php echo $filme['id']; ?>
+                            </td>
+
+                            <td class="p-5 font-medium">
+                                <div class="flex items-center gap-3">
+                                    <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+
+                                    <?php echo htmlspecialchars($filme['nome']); ?>
+                                </div>
+                            </td>
+
+                            <td class="p-5 text-zinc-300">
+                                <?php echo htmlspecialchars($filme['genero']); ?>
+                            </td>
+
+                            <td class="p-5">
+                                <span class="bg-orange-500/15 text-orange-400 border border-orange-500/30 px-4 py-2 rounded-xl text-sm font-semibold">
+                                    <?php echo htmlspecialchars($filme['classificacao']); ?>
+                                </span>
+                            </td>
+
+                            <td class="p-5">
+                                <div class="flex gap-3">
+
+                                    <a href="editar.php?id=<?php echo $filme['id']; ?>" class="w-10 h-10 flex items-center justify-center rounded-xl border border-orange-500/30 text-orange-400 hover:bg-orange-500/10 transition">
+                                        <i data-lucide="pencil" class="w-5 h-5"></i>
+                                    </a>
+
+                                    <a href="delete.php?id=<?php echo $filme['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir?')" class="w-10 h-10 flex items-center justify-center rounded-xl border border-red-500/30 text-red-400 hover:bg-red-500/10 transition">
+                                        <i data-lucide="trash-2" class="w-5 h-5"></i>
+                                    </a>
+
+                                </div>
+                            </td>
+                        </tr>
+
+                    <?php endforeach; ?>
+
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
 
 </body>
 </html>
