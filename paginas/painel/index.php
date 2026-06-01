@@ -15,6 +15,10 @@ $filmesEmCartaz = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $sql = "SELECT COUNT(*) AS total FROM sessoes";
 $stmt = $pdo->query($sql);
 $totalSessoes = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+
+$sql = "SELECT COUNT(*) AS total FROM ingressos";
+$stmt = $pdo->query($sql);
+$totalIngressos = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
 ?>
 
 <!DOCTYPE html>
@@ -130,7 +134,9 @@ $totalSessoes = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
                 </div>
 
                 <p class="text-zinc-400 text-lg mb-2">Ingressos</p>
-                <h3 class="text-4xl font-bold text-orange-500">156</h3>
+                <h3 class="text-4xl font-bold text-orange-500">
+                    <?php echo $totalIngressos; ?>
+                </h3>
             </div>
         </section>
 
