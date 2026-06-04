@@ -36,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,10 +45,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        body { font-family: 'Poppins', sans-serif; }
+        body{
+            font-family: 'Poppins', sans-serif;
+        }
     </style>
 </head>
 
@@ -56,75 +61,139 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     style="background-image: url('img/fundo-login.png');"
 >
 
-    <div class="min-h-screen bg-black/65 flex items-center justify-center p-8">
+    <div class="min-h-screen bg-black/65 flex items-center justify-center px-10">
 
-        <div class="w-full max-w-md bg-[#101014]/90 border border-orange-500/25 rounded-3xl p-10 shadow-[0_0_45px_rgba(249,115,22,0.18)] backdrop-blur-md">
+        <div class="w-full max-w-7xl flex items-center justify-between gap-20">
 
-            <div class="flex flex-col items-center text-center mb-8">
+            <!-- LADO ESQUERDO -->
 
-                <div class="w-20 h-20 rounded-3xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center mb-5 shadow-[0_0_25px_rgba(249,115,22,0.25)]">
-                    <i data-lucide="clapperboard" class="w-11 h-11 text-orange-400"></i>
+            <div class="hidden lg:flex flex-col items-center text-center w-1/2">
+
+                <div class="mb-8">
+
+                    <div class="w-40 h-40 rounded-full flex items-center justify-center">
+
+                        <i
+                            data-lucide="clapperboard"
+                            class="w-32 h-32 text-orange-400 drop-shadow-[0_0_25px_rgba(249,115,22,0.8)]"
+                        ></i>
+
+                    </div>
+
                 </div>
 
-                <h1 class="text-4xl font-bold leading-tight">
-                    <span class="text-white">Cinema</span>
-                    <span class="text-orange-500">Control</span>
+                <h1 class="text-8xl font-bold tracking-wide leading-none">
+                    CINEMA
                 </h1>
 
-                <p class="text-zinc-400 mt-3">
-                    Sistema de gerenciamento para cinemas
+                <h2 class="text-7xl font-light text-orange-500 tracking-wide">
+                    CONTROL
+                </h2>
+
+                <p class="mt-6 text-2xl text-zinc-300 leading-relaxed">
+                    Sistema de gerenciamento<br>
+                    para cinemas
                 </p>
 
             </div>
 
-            <?php if ($erro): ?>
-                <div class="bg-red-500/10 border border-red-500/30 text-red-400 rounded-2xl px-4 py-3 mb-5 text-sm">
-                    <?php echo htmlspecialchars($erro); ?>
+            <!-- LADO DIREITO -->
+
+            <div
+                class="w-full lg:w-[550px] bg-black/70 backdrop-blur-md border border-orange-500/30 rounded-[40px] p-10 shadow-[0_0_50px_rgba(249,115,22,0.18)]"
+            >
+
+                <div class="flex justify-center mb-6">
+
+                    <div class="w-24 h-24 rounded-full border border-orange-500/30 flex items-center justify-center">
+
+                        <i
+                            data-lucide="user"
+                            class="w-12 h-12 text-orange-400"
+                        ></i>
+
+                    </div>
+
                 </div>
-            <?php endif; ?>
 
-            <form method="POST" action="login.php" class="space-y-5">
+                <h2 class="text-4xl font-bold text-center mb-3">
+                    Bem-vindo de volta!
+                </h2>
 
-                <div>
-                    <label class="flex items-center gap-2 text-zinc-300 mb-2">
-                        <i data-lucide="mail" class="w-4 h-4 text-orange-400"></i>
-                        Email
-                    </label>
+                <p class="text-center text-zinc-400 mb-10">
+                    Acesse sua conta para gerenciar o cinema.
+                </p>
 
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Digite seu email"
-                        required
-                        class="w-full bg-black/40 border border-zinc-700 rounded-2xl px-5 py-4 outline-none focus:border-orange-500 transition"
+                <?php if ($erro): ?>
+
+                    <div class="bg-red-500/10 border border-red-500/30 text-red-400 rounded-2xl px-4 py-3 mb-5">
+
+                        <?php echo htmlspecialchars($erro); ?>
+
+                    </div>
+
+                <?php endif; ?>
+
+                <form method="POST" action="login.php" class="space-y-6">
+
+                    <div>
+
+                        <label class="flex items-center gap-2 text-orange-400 mb-2">
+
+                            <i data-lucide="mail" class="w-4 h-4"></i>
+
+                            E-mail
+
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Digite seu email"
+                            required
+                            class="w-full bg-black/40 border border-zinc-700 rounded-2xl px-5 py-4 text-white outline-none focus:border-orange-500 transition"
+                        >
+
+                    </div>
+
+                    <div>
+
+                        <label class="flex items-center gap-2 text-orange-400 mb-2">
+
+                            <i data-lucide="lock" class="w-4 h-4"></i>
+
+                            Senha
+
+                        </label>
+
+                        <input
+                            type="password"
+                            name="senha"
+                            placeholder="Digite sua senha"
+                            required
+                            class="w-full bg-black/40 border border-zinc-700 rounded-2xl px-5 py-4 text-white outline-none focus:border-orange-500 transition"
+                        >
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="w-full bg-orange-500 hover:bg-orange-600 transition py-4 rounded-2xl font-bold text-lg shadow-[0_0_25px_rgba(249,115,22,0.25)]"
                     >
+                        Entrar
+                    </button>
+
+                </form>
+
+                <div class="mt-8 border-t border-zinc-800 pt-6 text-center">
+
+                    <p class="text-zinc-500 text-sm">
+                        Desenvolvido por Mariah © 2026
+                    </p>
+
                 </div>
 
-                <div>
-                    <label class="flex items-center gap-2 text-zinc-300 mb-2">
-                        <i data-lucide="lock" class="w-4 h-4 text-orange-400"></i>
-                        Senha
-                    </label>
-
-                    <input
-                        type="password"
-                        id="senha"
-                        name="senha"
-                        placeholder="Digite sua senha"
-                        required
-                        class="w-full bg-black/40 border border-zinc-700 rounded-2xl px-5 py-4 outline-none focus:border-orange-500 transition"
-                    >
-                </div>
-
-                <button
-                    type="submit"
-                    class="w-full bg-orange-500 hover:bg-orange-600 transition py-4 rounded-2xl font-bold shadow-[0_0_25px_rgba(249,115,22,0.22)]"
-                >
-                    Entrar
-                </button>
-
-            </form>
+            </div>
 
         </div>
 
@@ -135,4 +204,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </script>
 
 </body>
+
 </html>
