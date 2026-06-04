@@ -99,7 +99,7 @@ $totalIngressos = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
             </div>
 
             <div class="relative z-10">
-                <h2 class="text-4xl font-bold mb-3">Olá, administrador</h2>
+                <h2 class="text-4xl font-bold mb-3">Olá, Mariah</h2>
                 <p class="text-zinc-400 text-lg">Bem-vindo ao Cinema Control.</p>
             </div>
         </section>

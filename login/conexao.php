@@ -1,9 +1,9 @@
 <?php
 
-define('DB_HOST',    'localhost');
-define('DB_NOME',    'cinema');
+define('DB_HOST',    'db');
+define('DB_NOME',    'cinema_control');
 define('DB_USUARIO', 'root');
-define('DB_SENHA',   '');
+define('DB_SENHA',   'root');
 define('DB_CHARSET', 'utf8mb4');
 
 function getConexao(): PDO
@@ -19,7 +19,6 @@ function getConexao(): PDO
     try {
         $pdo = new PDO($dsn, DB_USUARIO, DB_SENHA, $opcoes);
         return $pdo;
-
     } catch (PDOException $e) {
         die("Erro de conexão com o banco de dados: " . $e->getMessage());
     }

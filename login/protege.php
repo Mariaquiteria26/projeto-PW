@@ -2,7 +2,6 @@
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: /PROJETO-PW/login/login.php');
+    header('Location: /login/login.php');
     exit();
 }
-?>

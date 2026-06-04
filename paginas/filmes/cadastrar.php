@@ -16,10 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt = $pdo->prepare($sql);
 
     $stmt->execute([
-    ':nome' => $_POST['nome'],
-    ':genero' => $_POST['genero'],
-    ':classificacao' => $_POST['classificacao']
-]);
+        ':nome' => $_POST['nome'],
+        ':genero' => $_POST['genero'],
+        ':classificacao' => $_POST['classificacao']
+    ]);
 
     header('Location: index.php');
     exit();
@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Cadastrar Filme</title>
@@ -56,19 +57,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div>
                 <label class="block mb-2 text-zinc-300">Nome do Filme</label>
                 <input type="text" name="nome" required
-                class="w-full bg-zinc-900 border border-zinc-700 rounded-2xl px-5 py-4 outline-none focus:border-orange-500">
+                    class="w-full bg-zinc-900 border border-zinc-700 rounded-2xl px-5 py-4 outline-none focus:border-orange-500">
             </div>
 
             <div>
                 <label class="block mb-2 text-zinc-300">Gênero</label>
                 <input type="text" name="genero" required
-                class="w-full bg-zinc-900 border border-zinc-700 rounded-2xl px-5 py-4 outline-none focus:border-orange-500">
+                    class="w-full bg-zinc-900 border border-zinc-700 rounded-2xl px-5 py-4 outline-none focus:border-orange-500">
             </div>
 
             <div>
                 <label class="block mb-2 text-zinc-300">Classificação</label>
                 <select name="classificacao"
-                class="w-full bg-zinc-900 border border-zinc-700 rounded-2xl px-5 py-4 outline-none focus:border-orange-500">
+                    class="w-full bg-zinc-900 border border-zinc-700 rounded-2xl px-5 py-4 outline-none focus:border-orange-500">
                     <option>Livre</option>
                     <option>10+</option>
                     <option>12+</option>
@@ -80,12 +81,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <div class="flex justify-between gap-4 pt-4">
                 <a href="index.php"
-                class="bg-zinc-800 hover:bg-zinc-700 transition px-8 py-4 rounded-2xl font-semibold">
+                    class="bg-zinc-800 hover:bg-zinc-700 transition px-8 py-4 rounded-2xl font-semibold">
                     ← Voltar
                 </a>
 
                 <button type="submit"
-                class="bg-orange-500 hover:bg-orange-600 transition px-8 py-4 rounded-2xl font-semibold">
+                    class="bg-orange-500 hover:bg-orange-600 transition px-8 py-4 rounded-2xl font-semibold">
                     Cadastrar Filme
                 </button>
             </div>
@@ -98,4 +99,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </script>
 
 </body>
+
 </html>
