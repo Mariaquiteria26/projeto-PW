@@ -1,3 +1,8 @@
+## Demonstração Online
+
+Acesse a versão online do Cinema Control:
+
+🔗 https://redesigned-space-fiesta-r4w9jjpqwx9qfpp9r-8080.app.github.dev/login/login.php
 
 ## 1. Clonar o repositório
 
