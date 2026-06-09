@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 04/06/2026 às 21:43
+-- Tempo de geração: 09/06/2026 às 01:12
 -- Versão do servidor: 8.0.46
 -- Versão do PHP: 8.3.26
 
@@ -29,9 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `filmes` (
   `id` int NOT NULL,
-  `nome` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `genero` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `classificacao` int NOT NULL
+  `nome` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `genero` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `classificacao` varchar(10) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -39,10 +39,11 @@ CREATE TABLE `filmes` (
 --
 
 INSERT INTO `filmes` (`id`, `nome`, `genero`, `classificacao`) VALUES
-(8, 'O Diabo Veste Prada 2 ', 'Comédia', 14),
-(9, 'Pânico 7', 'Terror', 16),
-(10, 'Zootopia 2', 'Infantil', 0),
-(11, 'Vingadores: Ultimato', 'Ação/ Ficção científica ', 12);
+(8, 'O Diabo Veste Prada 2 ', 'Comédia', '14+'),
+(9, 'Pânico 7', 'Terror', '16+'),
+(10, 'Zootopia 2', 'Infantil', '0'),
+(11, 'Vingadores: Ultimato', 'Ação/ Ficção científica ', '12+'),
+(12, 'O Massacre da Serra Elétrica', 'Terror', '16+');
 
 -- --------------------------------------------------------
 
@@ -53,7 +54,7 @@ INSERT INTO `filmes` (`id`, `nome`, `genero`, `classificacao`) VALUES
 CREATE TABLE `ingressos` (
   `id` int NOT NULL,
   `sessao_id` int NOT NULL,
-  `cliente` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `cliente` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `quantidade` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -63,7 +64,8 @@ CREATE TABLE `ingressos` (
 
 INSERT INTO `ingressos` (`id`, `sessao_id`, `cliente`, `quantidade`) VALUES
 (1, 1, 'Mariah', 3),
-(3, 2, 'Renan', 43);
+(3, 2, 'Renan', 43),
+(4, 4, 'Maria Quitéria', 1);
 
 -- --------------------------------------------------------
 
@@ -76,7 +78,7 @@ CREATE TABLE `sessoes` (
   `filme_id` int NOT NULL,
   `data` date NOT NULL,
   `horario` time NOT NULL,
-  `sala` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
+  `sala` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -85,7 +87,8 @@ CREATE TABLE `sessoes` (
 
 INSERT INTO `sessoes` (`id`, `filme_id`, `data`, `horario`, `sala`) VALUES
 (1, 8, '2026-04-30', '19:30:00', 'Sala 05'),
-(2, 11, '2026-07-06', '20:00:00', 'Sala 02');
+(2, 11, '2026-07-06', '20:00:00', 'Sala 08'),
+(4, 12, '2026-06-09', '15:20:00', 'Sala 03');
 
 -- --------------------------------------------------------
 
@@ -95,9 +98,9 @@ INSERT INTO `sessoes` (`id`, `filme_id`, `data`, `horario`, `sala`) VALUES
 
 CREATE TABLE `usuarios` (
   `id` int NOT NULL,
-  `nome` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `senha` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `nome` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `senha` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -143,19 +146,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `filmes`
 --
 ALTER TABLE `filmes`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `ingressos`
 --
 ALTER TABLE `ingressos`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `sessoes`
 --
 ALTER TABLE `sessoes`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
