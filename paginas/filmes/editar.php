@@ -2,8 +2,6 @@
 
 require_once __DIR__ . '/../../login/conexao.php';
 
-$pdo = getConexao();
-
 $id = $_GET['id'];
 
 $sql = "SELECT * FROM filmes WHERE id = :id";

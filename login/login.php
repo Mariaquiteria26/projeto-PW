@@ -6,7 +6,6 @@ if (isset($_SESSION['user_id'])) {
 }
 
 require_once __DIR__ . '/conexao.php';
-$pdo = getConexao();
 
 $erro = '';
 

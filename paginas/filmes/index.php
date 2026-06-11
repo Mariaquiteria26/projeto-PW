@@ -2,8 +2,6 @@
 require_once __DIR__ . '/../../login/protege.php';
 require_once __DIR__ . '/../../login/conexao.php';
 
-$pdo = getConexao();
-
 $sql = "SELECT * FROM filmes";
 $stmt = $pdo->query($sql);
 $filmes = $stmt->fetchAll(PDO::FETCH_ASSOC);
