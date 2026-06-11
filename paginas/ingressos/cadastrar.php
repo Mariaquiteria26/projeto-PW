@@ -2,7 +2,6 @@
 require_once __DIR__ . '/../../login/protege.php';
 require_once __DIR__ . '/../../login/conexao.php';
 
-$pdo = getConexao();
 
 $sql = "SELECT sessoes.*,
                filmes.nome AS nome_filme
